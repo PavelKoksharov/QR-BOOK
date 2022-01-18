@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Библиотека</title>
+    <link rel="stylesheet" href="../../static/polls/css/style.css">
+    </head>
+<div class="page page-main">
+    <header class="header">
+        <div class="header-logo">
+            <a href="{% url "main" %}"><img src="../../static/polls/img/booklogo.png" style="width:100px; position:absolute;left:10px;top:5px;display:block;"></a>
+        </div>
+        <div class="menu">
+
+        {% block Header %}{% endblock %}
+
+
+                                            <div class="sign-in">
+                                                    <ul id="mainmenu" class="mainmenu">
+                                                        {% if request.user.is_authenticated %}
+                                                        <li class="last"> {{user.username}} | <a href="{% url 'logout' %}" class="register">Выйти</a></li>
+                                                        {% else %}
+                                                        <li class="last"><a href="{% url 'register' %}"  class="register">Регистрация</a> | <a href="{% url 'login' %}" class="register">Войти</a></li>
+                                                        {% endif %}
+                                                    </ul>
+                                                    <div class="clear"></div>
+                                            </div>
+        </div>
+    </header>
+    <div>
+    {% block content %}{% endblock %}
+    </div>
+                   <div style="padding-top:80px;"><footer>
+                        <img src="../../static/polls/img/footerlogo.png" style="position:absolute; width:50px; left:5px; top:5px;">
+                        <div class="social">
+                             <a href="https://vk.com/" class=" social-icon vk"><img src="../../static/polls/img/vkon.png" style="width:25px;"></a>
+                             <a href="https://www.facebook.com/" class=" social-icon fb"><img src="../../static/polls/img/fff.png"  style="width:25px;"></a>
+                             <a href="https://twitter.com/?lang=ru" class=" social-icon tw"><img src="../../static/polls/img/twit.png"  style="width:25px;"></a>
+                             <a href="https://www.instagram.com/" class=" social-icon inst"><img src="../../static/polls/img/inst.png"  style="width:25px;"></a>
+                             <a href="https://github.com/PavelKoksharov/QR-BOOK/tree/main" class=" social-icon git"><img src="../../static/polls/img/git.png"  style="width:25px;"></a>
+                        </div>
+                   </footer>
+                   </div>
+</div>
+</body>
+</html>

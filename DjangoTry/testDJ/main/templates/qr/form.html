@@ -1,0 +1,66 @@
+{% extends './Base.html' %}
+
+{% block Header %}
+    <a href="{% url "main" %}" class="main-menu btn">На главную</a>
+    <a href="{% url "instruction" %}" class="main-menu btn">Инструкция</a>
+    <a href="{% url "catalog" %}" class="main-menu btn">Список книг</a>
+{% endblock %}
+
+{% block content %}
+            <div class="take-book">
+            {% if books %}
+                <form action="{% url "del" %}" method="post" novalidate>
+                    <div class="list">
+                        <select class="js-select2" name="book" placeholder="Введите название книги">
+                            {% for book in books %}
+                            <option value="{{ book.Id }}">{{ book.BookTitle }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="choose-date">
+                        с <input type="date" class="date-1" name="calendar1">
+                        до <input type="date" class="date-2" name="calendar2">
+                    </div>
+                <!--</form> -->
+                        <div class="qr-button">
+                            {% if request.user.is_authenticated %}
+                                {% csrf_token %}
+                                <div class="take"><a><button type="submit" class="btn">Взять книгу</button></a></div>
+                            {% else %}
+                        </div>
+                                <div class="only"><p>Взять книгу могут только авторизированные пользователи</p></div>
+                            {% endif %}
+                            <div class="only" style="position:relative; right:70px;"><p>{{ errors }}</p></div>
+
+                </form>
+
+                <!--<input type="image" src="https://web.poecdn.com/public/news/FanArt/AtlasThiago.jpg" height="400" width="400"> -->
+            {% else %}
+                <p><b>Ого, y нас нет книг, в следующий раз точно повезет.</b></p>
+            {% endif %}
+            </div>
+    {% if request.user.is_authenticated  and books%}
+    <form method="post" action="{% url 'g'  %}">
+    {% csrf_token %}
+                    <input type="text" value="{{ data }}" name="data">
+                    <a  href='{% url 'g'  %}'><button class="btn btn-qr">Генерация QR</button></a>
+            </form>
+    <form method="post" action="{% url 's' %}">
+    {% csrf_token %}
+                    <a  href='{% url 's' %}'><button class="btn btn-qr">Qr-код сканер</button></a>
+                    <input type="text" value="{{ scan }}"></form>
+    {% endif %}
+        <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="../../static/polls/select2/dist/css/select2.min.css">
+        <script src="../../static/polls/select2/dist/js/select2.min.js"></script>
+        <script src="../../static/polls/select2/dist/js/i18n/ru.js"></script>
+        <script>
+        $(document).ready(function() {
+           $('.js-select2').select2({
+                placeholder: "Введите название книги",
+                maximumSelectionLength: 2,
+                language: "ru"
+           });
+        });
+        </script>
+{% endblock %}

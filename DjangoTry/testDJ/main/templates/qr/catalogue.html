@@ -1,0 +1,55 @@
+{% extends './Base.html' %}
+{% block Header %}
+    <a href="{% url "main" %}" class="main-menu btn">На главную</a>
+    <a href="{% url "instruction" %}" class="main-menu btn">Инструкция</a>
+    <a href="{% url "formBook" %}" class="main-menu btn">Взять книгу</a>
+{% endblock %}
+{% block content %}
+            <div class="book-list page-content">
+                <input class="form-control" type="text" placeholder="Поиск" id="search-text" onkeyup="tableSearch()">
+                <script>
+                    function tableSearch() {
+                        var phrase = document.getElementById('search-text');
+                        var table = document.getElementById('info-table');
+                        var regPhrase = new RegExp(phrase.value, 'i');
+                        var flag = false;
+                        for (var i = 1; i < table.rows.length; i++) {
+                            flag = false;
+                            for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
+                                flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
+                                if (flag) break;
+                            }
+                            if (flag) {
+                                table.rows[i].style.display = "";
+                            } else {
+                                table.rows[i].style.display = "none";
+                            }
+
+                        }
+                    }
+                </script>
+                <h1>Список книг</h1>
+                {% if books %}
+                    <table class="table table-striped" id="info-table">
+                        <tr class="th">
+                            <th>Название</th>
+                            <th>Автор</th>
+                            <th>Дата</th>
+                            <th>Ячейка</th>
+                        </tr>
+                        {% for book in books %}
+                            <tr>
+                                <td><a href='{% url 'bookInfo' book.Id %}' class="book-title">{{ book.BookTitle}}</a></td>
+                                <td>{{ book.Author }}</td>
+                                <td>{{ book.Year }}</td>
+                                <td>{{ book.Position }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>Ого, У нас нет книг, в следующий раз точно повезет</p>
+                {% endif %}
+            </div>
+
+{% endblock %}
+

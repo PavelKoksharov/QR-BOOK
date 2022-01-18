@@ -1,0 +1,67 @@
+{% extends './Base.html' %}
+{% block Header %}
+    <a href="{% url "instruction" %}" class="main-menu btn">Инструкция</a>
+    <a href="{% url "catalog" %}" class="main-menu btn">Список книг</a>
+    <a href="{% url "formBook" %}" class="main-menu btn">Взять книгу</a>
+{% endblock %}
+
+{% block content %}
+    <div class="page-content">
+                            <link rel="stylesheet" href="../../static/polls/css/simple-adaptive-slider.min.css">
+            <script defer src="../../static/polls/js/simple-adaptive-slider.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                  var slider = new SimpleAdaptiveSlider('.slider', {
+                    autoplay: false,
+                    interval: 5000,
+                    swipe: true,
+                  });
+                });
+            </script>
+                  <div class="slider">
+                    <div class="slider__wrapper">
+                      <div class="slider__items">
+                        <div class="slider__item slider__item-1">
+                            <a href="https://www.rbc.ru/business/13/01/2022/61df6b5a9a7947623d6c73bb" target="_blank"><h1 class="news-title">Илон Маск ответил на жалобы российских владельцев электромобилей Tesla</h1></a>
+                            <img src="../../static/polls/img/news-1.jpg" style="width:100%; height:100%;">
+                        </div>
+                        <div class="slider__item slider__item-2">
+                            <a href="https://www.rbc.ru/rbcfreenews/61de89589a7947064785df94" target="_blank"><h1 class="news-title">Владелец Facebook потерял 36 позиций в списке лучших работодателей в мире</h1></a>
+                            <img src="../../static/polls/img/news-2.jpg" style="width:100%; height:100%;">
+                        </div>
+                        <div class="slider__item slider__item-3">
+                             <a href="https://www.rbc.ru/business/11/01/2022/61dd59609a7947a212302bfb" target="_blank"><h1 class="news-title">«Ростех» стал совладельцем интернет-провайдера «Акадо»</h1></a>
+                            <img src="../../static/polls/img/news-3.jpg" style="width:100%; height:100%;">
+                        </div>
+                        <div class="slider__item slider__item-4">
+                             <a href="https://www.rbc.ru/business/11/01/2022/61dce07b9a794774a72f3df7" target="_blank"><h1 class="news-title">Создатель мессенджера Signal Мокси Марлинспайк ушел с поста гендиректора</h1></a>
+                            <img src="../../static/polls/img/news-4.jpg" style="width:100%; height:100%;">
+                        </div>
+                      </div>
+                    </div>
+                    <a class="slider__control slider__control_prev" href="#" role="button" data-slide="prev"></a>
+                    <a class="slider__control slider__control_next" href="#" role="button" data-slide="next"></a>
+                  </div>
+                <div class="features">
+                    <table class="feature">
+                        <tr>
+                            <td class="feature qr">
+                                <img src="../../static/polls/img/qr.png" style="width:70px;">
+                                <h2 class="features-title">Быстро</h2>
+                                <p>Больше не нужно стоять в очередях в библиотеке.<br> Чтобы получить книгу, нужно лишь отправить заявку и отсканировать qr-код.</p>
+                            </td>
+                            <td class="feature comfy">
+                                <img src="../../static/polls/img/comfy.png" style="width:70px;">
+                                <h2 class="features-title">Удобно</h2>
+                                <p>Полный каталог книг, подробная информация о каждой из них, а также актуальые новости бизнеса прямо у вас под рукой.</p>
+                            </td>
+                            <td class="feature free">
+                                <img src="../../static/polls/img/free.png" style="width:70px;">
+                                 <h2 class="features-title">Бесплатно</h2>
+                                <p>Получите полный доступ к библиотеке и сайту соверщенно бесплатно. <br> Регистрируйтесь, чтобы прямо сейчас начать свой путь к новым знаниям.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+    </div>
+{% endblock %}

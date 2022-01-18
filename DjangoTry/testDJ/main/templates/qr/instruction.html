@@ -1,0 +1,37 @@
+{% extends './Base.html' %}
+{% block Header %}
+    <a href="{% url "main" %}" class="main-menu btn">На главную</a>
+    <a href="{% url "catalog" %}" class="main-menu btn">Список книг</a>
+    <a href="{% url "formBook" %}" class="main-menu btn">Взять книгу</a>
+{% endblock %}
+
+{% block content %}
+            <div class="page-content instruction">
+            <h1>Инструкция</h1>
+            <ul>
+                <li>Ознакомиться с имеющимися книгами можно в <a href="{% url "catalog" %}">списке</a>.</li>
+                <li>Ячейка книги указана по ссылке на странице книги.</li>
+                <li>Чтобы взять книгу, перейдите по <a href="{% url "formBook" %}">ссылке</a>, выберете в списке
+                    нужную вам книгу и укажите с какого по какое число вы хотели бы взять книгу.</li>
+                <li>Нажмите на кнопку "Qr-код".</li>
+                <li>Отсканируйте код на нужной ячейке.</li>
+                <li>Возьмите книгу и закройте ячейку.</li>
+                <li>Чтобы вернуть книгу, нажмите на кнопку "Вернуть книгу" в личном кабинете
+                    и отсканируте Qr-код на нужной ячейке.</li>
+            </ul>
+        </div>
+        <div class="questions">
+
+            <img src="../../static/polls/img/question.png" style="width:150px;display:inline-block;">
+            <h2 class="questions-title">Остались вопросы?</h2>
+            <h3>Свяжитесь с нами в соцсетях!</h3>
+            <div class="social-reference">
+                <p>
+                    <a href="https://vk.com/" class="social btn">Вконтакте</a><br>
+                    <a href="https://www.facebook.com/" class="social btn">Facebook</a><br>
+                    <a href="https://twitter.com/?lang=ru" class="social btn">Twitter</a><br>
+                    <a href="https://www.instagram.com/" class="social btn">Instagram</a><br>
+                </p>
+            </div>
+        </div>
+{% endblock %}

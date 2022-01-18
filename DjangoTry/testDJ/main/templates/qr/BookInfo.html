@@ -1,0 +1,56 @@
+{% extends './Base.html' %}
+{% block Header %}
+
+    <a href="{% url "catalog" %}" class="main-menu btn">Список книг</a>
+    <a href="{% url "instruction" %}" class="main-menu btn">Инструкция</a>
+    <a href="{% url "formBook" %}" class="main-menu btn">Взять книгу</a>
+{% endblock %}
+
+{% block content %}
+    <div class="book">
+                <h1 class="book-title">{{ book.BookTitle }}</h1>
+                <h2>{% if book.Free%}
+                    В наличии
+                        {% else %}
+                            Нет в наличии до {{ book.DateSecond }}
+                    {% endif %}
+                </h2>
+        <p class="book-info">
+        <div class="book-img"><img src="{{ book.Img.url }}" style="width:100px;"></div><br>
+        <div class="info">
+        <p><b>Автор: </b>{{ book.Author }}</p>
+        <p><b>Год выпуска: </b>{{ book.Year }}</p>
+        <p><b>Ячейка: </b>{{ book.Position }}</p>
+        <p><b>Описание: </b><br>{{ book.Description }}</p>
+        <!--<p><b>Для библиографического списка:</b><br>{{ book.InfoForDocuments }}</p>-->
+
+
+
+            <h4>Комментарии:</h4>
+            {% for comment in comments %}
+                <div class="comments">
+                    <div class="comment-user">{{ comment.user }}</div><br>
+                {{ comment.text }}
+                    <div class="comment-date">{{ comment.created }}</div>
+                </div>
+            {% endfor %}
+            {% if user.is_active %}
+                <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="enter"><button type="submit" class="btn">Отправить</button></div>
+                </form>
+            {% else %}
+                <h4>Чтобы оставить комментарий авторизуйтесь</h4>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
